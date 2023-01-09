@@ -1,8 +1,9 @@
 // fetches the server for the JSON data
 export async function fetchData() {
   const response = await fetch("http://localhost:5000/users");
-  const promise = await response.json();
-  return promise;
+  if (response.ok) {
+    return await response.json();
+  }
 }
 
 // fetches the server with POST method with a new user object to be appended to the JSON
