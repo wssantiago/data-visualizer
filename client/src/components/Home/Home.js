@@ -31,17 +31,17 @@ function App() {
     <MainContainer>
       <NavForm submitFormHandler={submit} />
       <TitleContainer>
-        <StyledTitle>Visualise your data!</StyledTitle>
+        <StyledTitle>{people.users.length ? "Visualise your data!" : "There is no data to visualise"}</StyledTitle>
       </TitleContainer>
       <SubtitleContainer>
         <StyledSubtitle>Add new user data above.</StyledSubtitle>
       </SubtitleContainer>
       <DataContainer>
         <MUITableContainer>
-          {people.users && <Table users={people.users}></Table>}
+          {people.users.length && <Table users={people.users}></Table>}
         </MUITableContainer>
         <MUIChartContainer>
-          {people.users && <Donut users={people.users}></Donut>}
+          {people.users.length && <Donut users={people.users}></Donut>}
         </MUIChartContainer>
       </DataContainer>
     </MainContainer>
