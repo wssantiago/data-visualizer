@@ -29,3 +29,7 @@ npm start
 cd client
 npm start
 ```
+
+### data management
+
+In the server folder, there is a JSON containing the very data to this project. Every time the client fetches the server sending a GET request, it receives from it the desired data to be displayed to the user. This updates are made in such a way that the table and chart components are rerendered accordingly in real time. On the other hand, whenever the user sends a POST request to the server via the top form, the form data (verified) is appended to the server JSON. 
