@@ -68,3 +68,7 @@ npx jest
 ```
 
 The overall tests are simple but important ones.
+
+### the main styling is made using styled-components from react
+
+This styling files are inside folders and are named folderName.styles.js
