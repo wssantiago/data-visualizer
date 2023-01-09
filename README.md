@@ -72,3 +72,8 @@ The overall tests are simple but important ones.
 ### the main styling is made using styled-components from react
 
 This styling files are inside folders and are named folderName.styles.js
+
+## applied Chart and Table documentation
+
+- ApexCharts: https://apexcharts.com/docs/chart-types/pie-donut/
+- MUI X: https://mui.com/x/react-data-grid/
