@@ -15,7 +15,7 @@ function Table(props) {
   users.map(
     (usr) =>
       (usr["percentual"] = Math.round(
-        (parseInt(usr["participation"]) / totalParticipation) * 100
+        (Number(usr["participation"]) / totalParticipation) * 100
       ))
   );
 
