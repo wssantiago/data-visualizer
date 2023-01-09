@@ -9,7 +9,7 @@ function Donut(props) {
   // to define array of labels and participation values in order to define the percentual ones
   const users = props.users;
   users.forEach((element) => {
-    participation.push(parseInt(element.participation));
+    participation.push(Number(element.participation));
     labels.push(element.firstName + " " + element.lastName);
   });
 

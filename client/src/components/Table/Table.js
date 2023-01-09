@@ -7,7 +7,7 @@ function Table(props) {
   // calculates total amount of brute participation value to define the percentual ones
   let totalParticipation = 0;
   for (let i = 0; i < users.length; i++) {
-    totalParticipation += parseInt(users[i]["participation"]);
+    totalParticipation += Number(users[i]["participation"]);
   }
 
   // map through the users array passed as props from Home.js to
