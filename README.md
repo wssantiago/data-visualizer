@@ -50,3 +50,21 @@ In the server folder, there is a JSON containing the very data to this project. 
 ```
 
 When a new user is added to the JSON file via POST request, the percentual table column is updated as a whole for the total amount of the "participation" fields changes and so does the percentual participation. Therefore, there is no need to keep track of this extra field in the server data.
+
+## running tests
+
+### client tests at the /oncase-challenge folder
+
+```
+cd client
+npm test a
+```
+
+### server tests at the /oncase-challenge folder
+
+```
+cd server
+npx jest
+```
+
+The overall tests are simple but important ones.
