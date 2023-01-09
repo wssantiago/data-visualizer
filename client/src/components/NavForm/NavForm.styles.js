@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+/* Styled components utilised in the NavForm component rendering*/
+
 export const NavBar = styled.nav`
   background-color: #5bc0f8;
   display: flex;

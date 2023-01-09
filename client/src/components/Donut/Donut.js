@@ -4,12 +4,16 @@ import Chart from "react-apexcharts";
 function Donut(props) {
   const participation = [];
   const labels = [];
+
+  // map through users array passed as props from Home.js (the users array from server JSON)
+  // to define array of labels and participation values in order to define the percentual ones
   const users = props.users;
   users.forEach((element) => {
     participation.push(parseInt(element.participation));
     labels.push(element.firstName + " " + element.lastName);
   });
 
+  // configure chart labels options according to ApexCharts
   const options = {
     labels: labels,
     dataLabels: {
@@ -31,17 +35,13 @@ function Donut(props) {
     ],
   };
 
+  // define chart data
   const state = {
     options: options,
     series: participation,
-    responsive: [
-      {
-        breakpoint: 600,
-        options: options,
-      },
-    ],
   };
 
+  // the ApexChart donut chart 
   return (
     <div>
       {" "}

@@ -3,12 +3,15 @@ import { NavBar, StyledInput, StyledButton } from "./NavForm.styles.js";
 import { postData } from "../../api/api.js";
 
 function NavForm(props) {
+  // state that keeps track of the three input fields content
   const [newUser, setNewUser] = useState({
     firstName: "",
     lastName: "",
     participation: "",
   });
 
+  // handler function that is triggered whenever the inputs are changed
+  // it hence updates the state aforementioned with current input data
   const changeHandler = (e) => {
     const { name, value } = e.target;
     setNewUser((previousValue) => {
@@ -22,6 +25,11 @@ function NavForm(props) {
     });
   };
 
+  // when the form is submitted via SEND button,
+  // data is validated (not allowed empty names and non number participation).
+  // if the input fields are valid, the API is called to post the new user object,
+  // defined as a state, to the server and then triggers the props submit form handler
+  // executed in Home.js
   const submitHandler = (e) => {
     e.preventDefault();
     if (
@@ -29,12 +37,15 @@ function NavForm(props) {
       newUser.lastName !== "" &&
       Number(newUser.participation)
     ) {
-      postData(newUser).then(() => {
-        props.submitFormHandler();
+      postData(newUser).then((response) => {
+        if (response.ok) {
+          props.submitFormHandler();
+        }
       });
     }
   };
 
+  // the component with predefined styled components and their attributes
   return (
     <form data-testid="navForm" onSubmit={submitHandler} autoComplete="off">
       <NavBar>
