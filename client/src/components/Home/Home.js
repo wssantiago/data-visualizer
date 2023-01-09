@@ -12,12 +12,11 @@ import {
 import Table from "../Table/Table.js";
 import Donut from "../Donut/Donut.js";
 import NavForm from "../NavForm/NavForm.js";
-import {fetchData} from "../../api/api.js";
+import { fetchData } from "../../api/api.js";
 
 function App() {
-  const [people, setPeople] = useState([{}]);
+  const [people, setPeople] = useState({ users: [] });
   const [usrCreated, setUsrCreated] = useState(0);
-
   useEffect(() => {
     fetchData().then((data) => setPeople(data));
   }, [usrCreated]);
@@ -31,7 +30,11 @@ function App() {
     <MainContainer>
       <NavForm submitFormHandler={submit} />
       <TitleContainer>
-        <StyledTitle>{people.users.length ? "Visualise your data!" : "There is no data to visualise"}</StyledTitle>
+        <StyledTitle>
+          {people.users.length
+            ? "Visualise your data!"
+            : "There is no data to visualise."}
+        </StyledTitle>
       </TitleContainer>
       <SubtitleContainer>
         <StyledSubtitle>Add new user data above.</StyledSubtitle>
