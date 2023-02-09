@@ -1,5 +1,5 @@
-# oncase-challenge
-Oncase fullstack challenge
+# data-visualizer
+A web application for graphical visualization of the formatted input data  
 
 ### dependencies
 - React v18.2.0
