@@ -6,7 +6,7 @@ A web application for graphical visualization of the formatted input data
 - Node v16.14.2
 - npm v8.11.0
 
-### at the /oncase-challenge folder, start the project
+### at the /data-visualizer folder, start the project
 
 ```
 cd client
@@ -53,14 +53,14 @@ When a new user is added to the JSON file via POST request, the percentual table
 
 ## running tests
 
-### client tests at the /oncase-challenge folder
+### client tests at the /data-visualizerfolder
 
 ```
 cd client
 npm test a
 ```
 
-### server tests at the /oncase-challenge folder
+### server tests at the /data-visualizer folder
 
 ```
 cd server
