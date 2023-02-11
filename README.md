@@ -51,7 +51,7 @@ In the server folder, there is a JSON containing the very data to this project. 
 
 When a new user is added to the JSON file via POST request, the percentual table column is updated as a whole for the total amount of the "participation" fields changes and so does the percentual participation. Therefore, there is no need to keep track of this extra field in the server data.
 
-When one tries to send data where the first and last name are already on the JSON file, a PUT request is triggered and this user participation is updated and so is the whole visualization. In order to delete a user from the database, just type first and last names common to the JSON and click the delete button.
+When one tries to send data where the first and last names are already on the JSON file, a PUT request is triggered and this user participation is updated and so is the whole visualization. In order to delete a user from the database, just type first and last names common to the JSON and click the delete button.
 
 ## running tests
 
