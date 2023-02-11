@@ -17,3 +17,13 @@ export async function postData(newUser) {
     },
   });
 }
+
+export async function updateData(userInfo) {
+  return await fetch("http://localhost:5000/users/" + userInfo.id, {
+    method: "PUT",
+    body: JSON.stringify(userInfo),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+}

@@ -38,4 +38,19 @@ app.post("/users", (req, res) => {
   }
 });
 
+app.put("/users/:id", (req, res) => {
+  try {
+    var id = req.params.id;
+
+    let currData = JSON.parse(readFileSync("./data/users.json"));
+
+    currData["users"][id-1].participation = req.body.participation;
+
+    writeFileSync("./data/users.json", JSON.stringify(currData));
+    res.status(200).send("successful put");
+  } catch (error) {
+    res.status(400).send(error);
+  }
+});
+
 module.exports = app;

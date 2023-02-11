@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { NavBar, StyledInput, StyledButton } from "./NavForm.styles.js";
-import { postData } from "../../api/api.js";
+import { fetchData, updateData, postData } from "../../api/api.js";
 
 function NavForm(props) {
   // state that keeps track of the three input fields content
@@ -9,6 +9,8 @@ function NavForm(props) {
     lastName: "",
     participation: "",
   });
+
+  const users = props.users;
 
   // handler function that is triggered whenever the inputs are changed
   // it hence updates the state aforementioned with current input data
@@ -25,6 +27,18 @@ function NavForm(props) {
     });
   };
 
+  const userExists = (usr) => {
+    for (let i = 0; i < users.length; i++) {
+      let currUsr = users[i];
+      if (
+        currUsr.firstName === usr.firstName &&
+        currUsr.lastName === usr.lastName
+      )
+        return currUsr.id;
+    }
+    return -1;
+  };
+
   // when the form is submitted via SEND button,
   // data is validated (not allowed empty names and non number participation).
   // if the input fields are valid, the API is called to post the new user object,
@@ -37,11 +51,22 @@ function NavForm(props) {
       newUser.lastName !== "" &&
       Number(newUser.participation)
     ) {
-      postData(newUser).then((response) => {
-        if (response.ok) {
-          props.submitFormHandler();
-        }
-      });
+      let id = userExists(newUser);
+      if (id != -1) {
+        updateData({ id: id, participation: newUser.participation }).then(
+          (response) => {
+            if (response.ok) {
+              props.submitFormHandler();
+            }
+          }
+        );
+      } else {
+        postData(newUser).then((response) => {
+          if (response.ok) {
+            props.submitFormHandler();
+          }
+        });
+      }
     }
   };
 
@@ -62,6 +87,7 @@ function NavForm(props) {
           onChange={changeHandler}
         ></StyledInput>
         <StyledInput
+          type="number"
           placeholder="Participation"
           name="participation"
           value={newUser.participation}
