@@ -12,12 +12,16 @@ function Table(props) {
 
   // map through the users array passed as props from Home.js to
   // define an extra "percentual" in the client side only to be displayed in the table
-  users.map(
-    (usr) =>
-      (usr["percentual"] = Math.round(
-        (Number(usr["participation"]) / totalParticipation) * 100
-      ))
-  );
+  users.map(function (usr) {
+    let value = (
+      (Number(usr["participation"]) / totalParticipation) *
+      100
+    ).toString();
+    let dotIndex = value.indexOf(".");
+
+    if (dotIndex != -1) value = value.substring(0, dotIndex + 3);
+    usr["percentual"] = Number(value);
+  });
 
   // configuring the table columns according to the documentation of @mui/x-data-grid
   const columns = [

@@ -18,7 +18,10 @@ function Donut(props) {
     labels: labels,
     dataLabels: {
       formatter: function (val) {
-        return Math.round(val) + "%";
+        let strVal = val.toString();
+        let dotIndex = strVal.indexOf(".");
+        if(dotIndex != -1) val = Number(strVal.substring(0, dotIndex + 3));
+        return val + "%";
       },
     },
     colors: [
