@@ -44,10 +44,26 @@ app.put("/users/:id", (req, res) => {
 
     let currData = JSON.parse(readFileSync("./data/users.json"));
 
-    currData["users"][id-1].participation = req.body.participation;
+    currData["users"][id - 1].participation = req.body.participation;
 
     writeFileSync("./data/users.json", JSON.stringify(currData));
     res.status(200).send("successful put");
+  } catch (error) {
+    res.status(400).send(error);
+  }
+});
+
+app.delete("/users/:id", (req, res) => {
+  try {
+    var id = req.params.id;
+
+    let currData = JSON.parse(readFileSync("./data/users.json"));
+
+    currData["users"].splice(id-1, 1);
+    currData["users"].map((usr, i) => usr.id = i+1);
+
+    writeFileSync("./data/users.json", JSON.stringify(currData));
+    res.status(200).send("successful delete");
   } catch (error) {
     res.status(400).send(error);
   }

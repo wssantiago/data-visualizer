@@ -1,3 +1,5 @@
+import { useRadioGroup } from "@mui/material";
+
 // fetches the server for the JSON data
 export async function fetchData() {
   const response = await fetch("http://localhost:5000/users");
@@ -26,4 +28,14 @@ export async function updateData(userInfo) {
       "Content-Type": "application/json",
     },
   });
+}
+
+export async function deleteData(userInfo) {
+  return await fetch("http://localhost:5000/users/" + userInfo.id, {
+    method: "DELETE",
+    body: JSON.stringify(userInfo),
+    headers: {
+      "Content-Type": "application/json",
+    }
+  })
 }

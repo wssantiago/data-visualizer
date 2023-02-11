@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { NavBar, StyledInput, StyledButton } from "./NavForm.styles.js";
-import { fetchData, updateData, postData } from "../../api/api.js";
+import { updateData, postData, deleteData } from "../../api/api.js";
 
 function NavForm(props) {
   // state that keeps track of the three input fields content
@@ -9,6 +9,7 @@ function NavForm(props) {
     lastName: "",
     participation: "",
   });
+  const [submitter, setSubmitter] = useState("");
 
   const users = props.users;
 
@@ -39,6 +40,34 @@ function NavForm(props) {
     return -1;
   };
 
+  const updateUsers = (id) => {
+    if (id != -1) {
+      updateData({ id: id, participation: newUser.participation }).then(
+        (response) => {
+          if (response.ok) {
+            props.submitFormHandler();
+          }
+        }
+      );
+    } else {
+      postData(newUser).then((response) => {
+        if (response.ok) {
+          props.submitFormHandler();
+        }
+      });
+    }
+  };
+
+  const deleteUser = (id) => {
+    if (id != -1) {
+      deleteData({ id: id }).then((response) => {
+        if (response.ok) {
+          props.submitFormHandler();
+        }
+      });
+    }
+  };
+
   // when the form is submitted via SEND button,
   // data is validated (not allowed empty names and non number participation).
   // if the input fields are valid, the API is called to post the new user object,
@@ -46,27 +75,12 @@ function NavForm(props) {
   // executed in Home.js
   const submitHandler = (e) => {
     e.preventDefault();
-    if (
-      newUser.firstName !== "" &&
-      newUser.lastName !== "" &&
-      Number(newUser.participation)
-    ) {
+    if (newUser.firstName !== "" && newUser.lastName !== "") {
       let id = userExists(newUser);
-      if (id != -1) {
-        updateData({ id: id, participation: newUser.participation }).then(
-          (response) => {
-            if (response.ok) {
-              props.submitFormHandler();
-            }
-          }
-        );
-      } else {
-        postData(newUser).then((response) => {
-          if (response.ok) {
-            props.submitFormHandler();
-          }
-        });
-      }
+      if (submitter === "SEND" && Number(newUser.participation))
+        updateUsers(id);
+      else if (submitter === "DELETE") deleteUser(id);
+      setNewUser({ firstName: "", lastName: "", participation: "" });
     }
   };
 
@@ -93,7 +107,12 @@ function NavForm(props) {
           value={newUser.participation}
           onChange={changeHandler}
         ></StyledInput>
-        <StyledButton type="submit">SEND</StyledButton>
+        <StyledButton type="submit" onClick={() => setSubmitter("SEND")}>
+          SEND
+        </StyledButton>
+        <StyledButton type="submit" onClick={() => setSubmitter("DELETE")}>
+          DELETE
+        </StyledButton>
       </NavBar>
     </form>
   );

@@ -8,7 +8,7 @@ export const NavBar = styled.nav`
   justify-content: center;
   align-items: center;
   padding: 5% 15%;
-  @media (max-width: 800px) {
+  @media (max-width: 930px) {
     display: block;
   }
 
@@ -34,7 +34,7 @@ export const StyledInput = styled.input.attrs((props) => ({
     &:hover{
       transform: scale(1.01);
     }
-    @media (max-width: 800px) {
+    @media (max-width: 930px) {
         display: block;
         margin: 3% auto;
     }
@@ -49,6 +49,7 @@ export const StyledButton = styled.button.attrs((props) => ({
     font-weight: 600;
     height: 2.8rem;
     padding: 0 3%;
+    margin-right: 3%;
     border: 1px solid white;
     border-radius: 0.2rem;
     box-shadow: inset 0 0 0 0 white;
@@ -64,7 +65,7 @@ export const StyledButton = styled.button.attrs((props) => ({
         transform: translate(2px, -2px);
     }
 
-    @media (max-width: 800px) {
+    @media (max-width: 930px) {
         display: block;
         margin: 3% auto;
         height: 2.5rem;
