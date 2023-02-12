@@ -1,6 +1,9 @@
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 import { NavBar, StyledInput, StyledButton } from "./NavForm.styles.js";
 import { updateData, postData, deleteData } from "../../api/api.js";
+
+//toast.configure();
 
 function NavForm(props) {
   // state that keeps track of the three input fields content
@@ -19,11 +22,11 @@ function NavForm(props) {
     const { name, value } = e.target;
     setNewUser((previousValue) => {
       if (name === "firstName") {
-        return { ...previousValue, firstName: value };
+        return { ...previousValue, firstName: value.trim() };
       } else if (name === "lastName") {
-        return { ...previousValue, lastName: value };
+        return { ...previousValue, lastName: value.trim() };
       } else if (name === "participation") {
-        return { ...previousValue, participation: value };
+        return { ...previousValue, participation: value.trim() };
       }
     });
   };
@@ -46,6 +49,13 @@ function NavForm(props) {
         (response) => {
           if (response.ok) {
             props.submitFormHandler();
+            toast.success(
+              newUser.firstName +
+                " " +
+                newUser.lastName +
+                " participation was updated!"
+            );
+            setNewUser({ firstName: "", lastName: "", participation: "" });
           }
         }
       );
@@ -53,6 +63,8 @@ function NavForm(props) {
       postData(newUser).then((response) => {
         if (response.ok) {
           props.submitFormHandler();
+          toast.success("New user added successfully!");
+          setNewUser({ firstName: "", lastName: "", participation: "" });
         }
       });
     }
@@ -63,9 +75,13 @@ function NavForm(props) {
       deleteData({ id: id }).then((response) => {
         if (response.ok) {
           props.submitFormHandler();
+          toast.success(
+            "User " + newUser.firstName + " " + newUser.lastName + " deleted!"
+          );
+          setNewUser({ firstName: "", lastName: "", participation: "" });
         }
       });
-    }
+    } else toast.error("Trying to delete nonexistent user!");
   };
 
   // when the form is submitted via SEND button,
@@ -77,11 +93,12 @@ function NavForm(props) {
     e.preventDefault();
     if (newUser.firstName !== "" && newUser.lastName !== "") {
       let id = userExists(newUser);
-      if (submitter === "SEND" && Number(newUser.participation))
-        updateUsers(id);
-      else if (submitter === "DELETE") deleteUser(id);
-      setNewUser({ firstName: "", lastName: "", participation: "" });
-    }
+      if (submitter === "SEND") {
+        if (Number(newUser.participation)) {
+          updateUsers(id);
+        } else toast.error("Insert user participation in order to add");
+      } else if (submitter === "DELETE") deleteUser(id);
+    } else toast.error("Insert user first and last names to continue");
   };
 
   // the component with predefined styled components and their attributes
