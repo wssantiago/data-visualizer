@@ -44,7 +44,7 @@ function NavForm(props) {
   };
 
   const updateUsers = (id) => {
-    if (id != -1) {
+    if (id !== -1) {
       updateData({ id: id, participation: newUser.participation }).then(
         (response) => {
           if (response.ok) {
@@ -71,7 +71,7 @@ function NavForm(props) {
   };
 
   const deleteUser = (id) => {
-    if (id != -1) {
+    if (id !== -1) {
       deleteData({ id: id }).then((response) => {
         if (response.ok) {
           props.submitFormHandler();

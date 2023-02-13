@@ -1,5 +1,3 @@
-import { useRadioGroup } from "@mui/material";
-
 // fetches the server for the JSON data
 export async function fetchData() {
   const response = await fetch("http://localhost:5000/users");
@@ -20,6 +18,7 @@ export async function postData(newUser) {
   });
 }
 
+// fetches the server with PUT method in order to update existing user participation
 export async function updateData(userInfo) {
   return await fetch("http://localhost:5000/users/" + userInfo.id, {
     method: "PUT",
@@ -30,6 +29,7 @@ export async function updateData(userInfo) {
   });
 }
 
+// fetches the server with DELETE method in order to delete existing user
 export async function deleteData(userInfo) {
   return await fetch("http://localhost:5000/users/" + userInfo.id, {
     method: "DELETE",
