@@ -26,11 +26,11 @@ function Table(props) {
 
   // configuring the table columns according to the documentation of @mui/x-data-grid
   const columns = [
-    { field: "id", headerName: "", width: 70 },
-    { field: "firstName", headerName: "First name", width: 130 },
-    { field: "lastName", headerName: "Last name", width: 130 },
-    { field: "participation", headerName: "Participation", width: 120 },
-    { field: "percentual", headerName: "Participation (%)", width: 120 },
+    { field: "id", headerName: "", width: 70, sortable: false },
+    { field: "firstName", headerName: "First name", width: 130, sortable: false },
+    { field: "lastName", headerName: "Last name", width: 130, sortable: false },
+    { field: "participation", headerName: "Participation", width: 120, sortable: false },
+    { field: "percentual", headerName: "Participation (%)", width: 120, sortable: false },
   ];
 
   // the DataGrid mui component with inline styles to be applied responsively
